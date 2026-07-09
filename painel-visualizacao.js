@@ -195,13 +195,14 @@ function resumoEstrutura() {
     percent: "execPercent",
     bar: "execBar"
   });
+  resumoDiametros(dados);
 }
 
 function preencherResumo(lista, ids) {
   const total = lista.length;
   const pendentes = lista.filter(e => classeStatus(e.status) === "pendente").length;
-  const furadas = lista.filter(e => classeStatus(e.status) === "furada").length;
-  const concretadas = lista.filter(e => classeStatus(e.status) === "concretada").length;
+  const furadas = lista.filter(e => estaFurada(e.status)).length;
+  const concretadas = lista.filter(e => estaConcretada(e.status)).length;
   const percent = total ? Math.round((concretadas / total) * 100) : 0;
   setText(ids.total, total);
   setText(ids.pendentes, pendentes);
@@ -209,6 +210,52 @@ function preencherResumo(lista, ids) {
   setText(ids.concretadas, concretadas);
   setText(ids.percent, `${percent}%`);
   document.getElementById(ids.bar).style.width = `${percent}%`;
+}
+
+function resumoDiametros(lista) {
+  const grupos = {};
+
+  lista.forEach(e => {
+    const diametro = String(e.diametro || "Sem diametro").trim() || "Sem diametro";
+    if (!grupos[diametro]) {
+      grupos[diametro] = { diametro, total: 0, furadas: 0, concretadas: 0 };
+    }
+
+    const status = classeStatus(e.status);
+    grupos[diametro].total += 1;
+    if (estaFurada(status)) grupos[diametro].furadas += 1;
+    if (estaConcretada(status)) grupos[diametro].concretadas += 1;
+  });
+
+  const linhas = Object.values(grupos).sort((a, b) => {
+    const na = Number(String(a.diametro).replace(",", "."));
+    const nb = Number(String(b.diametro).replace(",", "."));
+    if (Number.isFinite(na) && Number.isFinite(nb)) return na - nb;
+    return String(a.diametro).localeCompare(String(b.diametro), "pt-BR");
+  });
+
+  const el = document.getElementById("diameterSummary");
+  if (!linhas.length) {
+    el.innerHTML = `<div class="diameter-empty">Sem dados.</div>`;
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="diameter-row diameter-head">
+      <span>Ø</span>
+      <span>Total</span>
+      <span>Furadas</span>
+      <span>Concretadas</span>
+    </div>
+    ${linhas.map(item => `
+      <div class="diameter-row">
+        <strong>${escapeHtml(item.diametro)}</strong>
+        <span>${item.total}</span>
+        <span>${percentual(item.furadas, item.total)}%</span>
+        <span>${percentual(item.concretadas, item.total)}%</span>
+      </div>
+    `).join("")}
+  `;
 }
 
 function dashboard() {
@@ -244,7 +291,11 @@ function estruturaConfig(id) {
 
 function zoomPadraoEstrutura() {
   const z = Number(estruturaConfig(estruturaAtual).defaultZoom);
-  return Number.isFinite(z) && z > 0 ? z : 1;
+  const base = Number.isFinite(z) && z > 0 ? z : 1;
+  if (window.matchMedia("(max-width: 560px)").matches) {
+    return Math.max(.1, Math.min(base, base * .55));
+  }
+  return base;
 }
 
 function estruturaValida(id) {
@@ -269,6 +320,15 @@ function classeStatus(status) {
   return String(status || "Pendente").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+function estaFurada(status) {
+  const s = classeStatus(status);
+  return s === "furada" || s === "concretada";
+}
+
+function estaConcretada(status) {
+  return classeStatus(status) === "concretada";
+}
+
 function numeroBase(v) {
   const n = Number(String(v ?? "").replace(",", "."));
   return Number.isFinite(n) ? n : 0;
@@ -285,6 +345,19 @@ function numero(v) {
 
 function valor(v) {
   return v === undefined || v === null || v === "" ? "-" : v;
+}
+
+function percentual(parte, total) {
+  return total ? Math.round((parte / total) * 100) : 0;
+}
+
+function escapeHtml(v) {
+  return String(v)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function normalizarTexto(valor) {
