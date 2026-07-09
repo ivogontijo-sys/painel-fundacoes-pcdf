@@ -251,8 +251,8 @@ function resumoDiametros(lista) {
       <div class="diameter-row">
         <strong>${escapeHtml(item.diametro)}</strong>
         <span>${item.total}</span>
-        <span>${percentual(item.furadas, item.total)}%</span>
-        <span>${percentual(item.concretadas, item.total)}%</span>
+        <span class="pct-furada">${percentual(item.furadas, item.total)}%</span>
+        <span class="pct-concretada">${percentual(item.concretadas, item.total)}%</span>
       </div>
     `).join("")}
   `;
