@@ -1,0 +1,30 @@
+PAINEL DE FUNDACOES PCDF - VERSAO PUBLICA
+
+Esta pasta contem somente a visualizacao do painel.
+
+Arquivos publicados:
+- index.html
+- painel.html
+- style.css
+- config.js
+- painel-visualizacao.js
+- assets/
+
+O cadastro de posicoes nao esta incluido nesta versao publica.
+As posicoes das estacas ja ficam salvas na aba Coordenadas da Google Planilha.
+
+Link principal apos publicar:
+- index.html ou painel.html
+
+Base de dados:
+- Google Planilha configurada no config.js
+- Aba Estacas: dados das estacas
+- Aba Coordenadas: posicoes X/Y cadastradas localmente
+
+Edificacoes:
+- Bloco 1
+- Bloco 2
+- Anfiteatro
+- Arquibancada
+
+Para alterar posicoes futuramente, use a versao local completa do projeto.

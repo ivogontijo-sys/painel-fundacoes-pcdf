@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de Fundações | Estacas PCDF</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="painel-page">
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="assets/logo.jpg" alt="Logo Gonar Engenharia">
+      <div>
+        <strong>GONAR ENGENHARIA</strong>
+        <span>Controle de Fundações - Obra PCDF</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="map-panel" aria-label="Planta da fundação">
+      <div class="map-actions">
+        <label class="select-label" for="selEstrutura">Edificação</label>
+        <select id="selEstrutura"></select>
+        <div class="toolbar" aria-label="Controles do mapa">
+          <button id="btnMenos" type="button">−</button>
+          <button id="btnMais" type="button">+</button>
+          <button id="btnReset" type="button">100%</button>
+        </div>
+        <label class="select-label" for="selEstaca">Estaca</label>
+        <select id="selEstaca"></select>
+      </div>
+      <div class="viewport" id="viewport">
+        <div class="mapa" id="mapa">
+          <img id="planta" alt="Mapa de estacas PCDF">
+          <div id="markers"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <section class="summary general-summary">
+        <div class="section-heading">
+          <h1>Resumo geral</h1>
+          <span>Todos</span>
+        </div>
+        <div class="kpis">
+          <div><b id="kpiGeralTotal">0</b><span>Total</span></div>
+          <div><b id="kpiGeralPendentes">0</b><span>Pendentes</span></div>
+          <div><b id="kpiGeralFuradas">0</b><span>Furadas</span></div>
+          <div><b id="kpiGeralConcretadas">0</b><span>Concretadas</span></div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-meta">
+            <strong id="execGeralPercent">0%</strong>
+            <span>Executado</span>
+          </div>
+          <div class="progress-track"><i id="execGeralBar"></i></div>
+        </div>
+      </section>
+      <section class="summary">
+        <div class="section-heading">
+          <h1>Resumo da edificação</h1>
+          <span id="syncStatus">Protótipo</span>
+        </div>
+        <div class="kpis">
+          <div><b id="kpiTotal">0</b><span>Total</span></div>
+          <div><b id="kpiPendentes">0</b><span>Pendentes</span></div>
+          <div><b id="kpiFuradas">0</b><span>Furadas</span></div>
+          <div><b id="kpiConcretadas">0</b><span>Concretadas</span></div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-meta">
+            <strong id="execPercent">0%</strong>
+            <span>Executado</span>
+          </div>
+          <div class="progress-track"><i id="execBar"></i></div>
+        </div>
+        <div class="legend">
+          <span><i class="dot pendente"></i>Pendente</span>
+          <span><i class="dot furada"></i>Furada</span>
+          <span><i class="dot concretada"></i>Concretada</span>
+        </div>
+      </section>
+
+      <section class="detail">
+        <div class="section-heading">
+          <h2>Estaca selecionada</h2>
+        </div>
+        <div id="info" class="detail-card empty">Selecione uma estaca.</div>
+      </section>
+
+      <section class="dashboard visible-dashboard">
+        <div class="section-heading">
+          <h2>Dashboard</h2>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Produção diária</div>
+          <div class="bars" id="dailyBars"></div>
+        </div>
+        <div class="metric-grid">
+          <div><span>Volume</span><b id="dashVolume">0,00 m³</b></div>
+          <div><span>Metros</span><b id="dashMetros">0,00 m</b></div>
+        </div>
+      </section>
+
+      <div class="message" id="msg"></div>
+    </aside>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="painel-visualizacao.js"></script>
+</body>
+</html>
