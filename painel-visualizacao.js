@@ -112,7 +112,6 @@ function renderizar() {
   desenhar();
   resumoGeral();
   resumoEstrutura();
-  dashboard();
   const atual = dados.find(e => e.estaca === selecionada?.estaca);
   mostrar(atual || dados[0]);
 }
@@ -181,6 +180,8 @@ function resumoGeral() {
     pendentes: "kpiGeralPendentes",
     furadas: "kpiGeralFuradas",
     concretadas: "kpiGeralConcretadas",
+    furacaoPercent: "furacaoGeralPercent",
+    furacaoBar: "furacaoGeralBar",
     percent: "execGeralPercent",
     bar: "execGeralBar"
   });
@@ -192,6 +193,8 @@ function resumoEstrutura() {
     pendentes: "kpiPendentes",
     furadas: "kpiFuradas",
     concretadas: "kpiConcretadas",
+    furacaoPercent: "furacaoPercent",
+    furacaoBar: "furacaoBar",
     percent: "execPercent",
     bar: "execBar"
   });
@@ -203,13 +206,16 @@ function preencherResumo(lista, ids) {
   const pendentes = lista.filter(e => classeStatus(e.status) === "pendente").length;
   const furadas = lista.filter(e => estaFurada(e.status)).length;
   const concretadas = lista.filter(e => estaConcretada(e.status)).length;
-  const percent = total ? Math.round((concretadas / total) * 100) : 0;
+  const percentFuracao = total ? Math.round((furadas / total) * 100) : 0;
+  const percentConcretagem = total ? Math.round((concretadas / total) * 100) : 0;
   setText(ids.total, total);
   setText(ids.pendentes, pendentes);
   setText(ids.furadas, furadas);
   setText(ids.concretadas, concretadas);
-  setText(ids.percent, `${percent}%`);
-  document.getElementById(ids.bar).style.width = `${percent}%`;
+  setText(ids.furacaoPercent, `${percentFuracao}%`);
+  document.getElementById(ids.furacaoBar).style.width = `${percentFuracao}%`;
+  setText(ids.percent, `${percentConcretagem}%`);
+  document.getElementById(ids.bar).style.width = `${percentConcretagem}%`;
 }
 
 function resumoDiametros(lista) {
@@ -251,8 +257,8 @@ function resumoDiametros(lista) {
       <div class="diameter-row">
         <strong>${escapeHtml(item.diametro)}</strong>
         <span>${item.total}</span>
-        <span class="pct-furada">${percentual(item.furadas, item.total)}%</span>
-        <span class="pct-concretada">${percentual(item.concretadas, item.total)}%</span>
+        <span class="pct-furada">${item.furadas}</span>
+        <span class="pct-concretada">${item.concretadas}</span>
       </div>
     `).join("")}
   `;

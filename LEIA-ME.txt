@@ -1,20 +1,23 @@
 PAINEL DE FUNDACOES PCDF - VERSAO PUBLICA
 
-Esta pasta contem somente a visualizacao do painel.
+Esta pasta contem a visualizacao do painel e a tela de atualizacao de execucao em obra.
 
 Arquivos publicados:
 - index.html
 - painel.html
+- execucao.html
 - style.css
 - config.js
 - painel-visualizacao.js
+- execucao-estacas.js
 - assets/
 
 O cadastro de posicoes nao esta incluido nesta versao publica.
 As posicoes das estacas ja ficam salvas na aba Coordenadas da Google Planilha.
 
-Link principal apos publicar:
-- index.html ou painel.html
+Links principais apos publicar:
+- painel.html: visualizacao
+- execucao.html: atualizacao de execucao em campo
 
 Base de dados:
 - Google Planilha configurada no config.js

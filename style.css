@@ -301,8 +301,8 @@ a {
 }
 
 .general-summary {
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
 }
 
 .section-heading {
@@ -434,7 +434,7 @@ h1, h2 {
 .detail-card h3 {
   margin: 0 0 10px;
   color: var(--navy);
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .status-pill {
@@ -446,6 +446,7 @@ h1, h2 {
   border-radius: 999px;
   background: #fff;
   border: 1px solid var(--line);
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -464,7 +465,7 @@ h1, h2 {
 .detail-grid span {
   display: block;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -472,7 +473,7 @@ h1, h2 {
 .detail-grid b {
   display: block;
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .obs {
