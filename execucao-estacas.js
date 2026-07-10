@@ -40,6 +40,8 @@ function acessoLiberado() {
 }
 
 function liberarAcesso() {
+  document.body.classList.remove("exec-locked");
+  document.body.classList.add("exec-unlocked");
   lockPanel.classList.add("hidden");
   execPanel.classList.remove("hidden");
   carregar();

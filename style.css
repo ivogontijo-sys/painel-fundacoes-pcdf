@@ -660,6 +660,18 @@ h1, h2 {
   width: min(420px, 100%);
 }
 
+.execucao-page.exec-locked #execPanel {
+  display: none !important;
+}
+
+.execucao-page.exec-locked #execMapCard,
+.execucao-page.exec-locked #viewport,
+.execucao-page.exec-locked #mapa,
+.execucao-page.exec-locked #planta,
+.execucao-page.exec-locked #markers {
+  display: none !important;
+}
+
 .exec-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
