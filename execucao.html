@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Execucao de Estacas | PCDF</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="execucao-page">
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="assets/logo.jpg" alt="Logo Gonar Engenharia">
+      <div>
+        <strong>GONAR ENGENHARIA</strong>
+        <span>Atualizacao de execucao - Obra PCDF</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="exec-shell">
+    <section class="exec-card exec-lock" id="lockPanel">
+      <div class="section-heading">
+        <h1>Acesso da obra</h1>
+        <span>Restrito</span>
+      </div>
+      <label class="exec-field">
+        <span>PIN</span>
+        <input id="pinInput" type="password" inputmode="text" autocomplete="off" placeholder="Informe o PIN">
+      </label>
+      <button class="primary-action" id="btnEntrar" type="button">Entrar</button>
+      <div class="message" id="lockMsg"></div>
+    </section>
+
+    <section class="exec-card exec-form-panel hidden" id="execPanel">
+      <div class="section-heading">
+        <h1>Atualizar estaca</h1>
+        <span id="syncStatus">Online</span>
+      </div>
+
+      <div class="exec-grid">
+        <label class="exec-field">
+          <span>Edificacao</span>
+          <select id="selEstrutura"></select>
+        </label>
+
+        <label class="exec-field">
+          <span>Estaca</span>
+          <select id="selEstaca"></select>
+        </label>
+      </div>
+
+      <button class="secondary-action exec-map-toggle" id="btnToggleMapa" type="button">Selecionar no mapa</button>
+
+      <div class="exec-map-card hidden" id="execMapCard">
+        <div class="section-heading">
+          <h2>Selecionar no mapa</h2>
+          <span>Toque na estaca</span>
+        </div>
+        <div class="exec-map-toolbar">
+          <button class="secondary-action" id="btnMenos" type="button">-</button>
+          <button class="secondary-action" id="btnMais" type="button">+</button>
+          <button class="secondary-action" id="btnReset" type="button">100%</button>
+        </div>
+        <div class="viewport exec-viewport" id="viewport">
+          <div class="mapa" id="mapa">
+            <img id="planta" alt="Mapa de estacas PCDF">
+            <div id="markers"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exec-selected">
+        <div>
+          <span>Selecionada</span>
+          <strong id="execEstaca">-</strong>
+        </div>
+        <div>
+          <span>Bloco</span>
+          <strong id="execBloco">-</strong>
+        </div>
+        <div>
+          <span>Diametro</span>
+          <strong id="execDiametro">-</strong>
+        </div>
+        <div>
+          <span>Status atual</span>
+          <strong id="execStatusAtual">-</strong>
+        </div>
+      </div>
+
+      <div class="exec-actions">
+        <button class="secondary-action" id="btnFuradaHoje" type="button">Furada hoje</button>
+        <button class="secondary-action" id="btnConcretadaHoje" type="button">Concretada hoje</button>
+      </div>
+
+      <div class="exec-grid">
+        <label class="exec-field">
+          <span>Status</span>
+          <select id="statusInput">
+            <option value="Pendente">Pendente</option>
+            <option value="Furada">Furada</option>
+            <option value="Concretada">Concretada</option>
+          </select>
+        </label>
+
+        <label class="exec-field">
+          <span>Volume utilizado (m3)</span>
+          <input id="volumeInput" type="number" min="0" step="0.01" inputmode="decimal">
+        </label>
+
+        <label class="exec-field">
+          <span>Data furacao</span>
+          <input id="furacaoInput" type="date">
+        </label>
+
+        <label class="exec-field">
+          <span>Data concretagem</span>
+          <input id="concretagemInput" type="date">
+        </label>
+      </div>
+
+      <label class="exec-field">
+        <span>Observacoes</span>
+        <textarea id="obsInput" rows="4"></textarea>
+      </label>
+
+      <div class="exec-actions">
+        <button class="secondary-action" id="btnRecarregar" type="button">Recarregar</button>
+        <button class="primary-action save-action" id="btnSalvar" type="button">Salvar execucao</button>
+      </div>
+
+      <div class="message" id="msg"></div>
+    </section>
+  </main>
+
+  <script src="config.js?v=20260709-1935"></script>
+  <script src="execucao-estacas.js?v=20260709-1935"></script>
+</body>
+</html>
