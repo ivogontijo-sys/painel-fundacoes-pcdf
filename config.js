@@ -11,5 +11,6 @@ const CONFIG = {
   PLAN_IMAGE_URL: "assets/mapa-bloco-1-planta-02.png",
   DEMO_DATA_URL: "assets/estacas-demo.json",
   REFRESH_SECONDS: 60,
+  EXECUTION_PIN: "pcdf2026",
   API_URL: "https://script.google.com/macros/s/AKfycbzt8SmxQoBRcRPu4osm4hF-zXzPOpAVeoADrvB6Qx-QuqyJ9uPcumDQpUO0w1npBe1O7g/exec"
 };
